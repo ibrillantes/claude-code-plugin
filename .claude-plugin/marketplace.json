@@ -1,0 +1,17 @@
+{
+  "name": "agentfy",
+  "owner": {
+    "name": "Agentfy",
+    "email": "support@getagentfy.com"
+  },
+  "metadata": {
+    "description": "Agentfy — monitor your Claude Code agents from your phone."
+  },
+  "plugins": [
+    {
+      "name": "agentfy",
+      "source": "./plugins/agentfy",
+      "description": "Get iPhone notifications and Live Activities when your Claude Code agents start, stop, or need you."
+    }
+  ]
+}

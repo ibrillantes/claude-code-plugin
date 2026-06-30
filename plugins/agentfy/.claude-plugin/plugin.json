@@ -1,0 +1,27 @@
+{
+  "name": "agentfy",
+  "version": "1.0.0",
+  "description": "Get iPhone notifications and Live Activities when your Claude Code agents start, stop, or need you.",
+  "homepage": "https://getagentfy.com",
+  "author": {
+    "name": "Agentfy",
+    "email": "support@getagentfy.com"
+  },
+  "license": "MIT",
+  "keywords": ["notifications", "ios", "live-activity", "monitoring", "hooks"],
+  "userConfig": {
+    "api_token": {
+      "type": "string",
+      "title": "Agentfy API token",
+      "description": "Find this in the Agentfy iOS app under Settings → Configure Claude Code.",
+      "sensitive": true,
+      "required": true
+    },
+    "prompt_preview": {
+      "type": "boolean",
+      "title": "Send a short prompt preview",
+      "description": "Send only the first 30 characters of each prompt (truncated on your own machine, before anything is sent) so the app can show what each agent is working on. Turn this off to send no prompt text at all.",
+      "default": true
+    }
+  }
+}
