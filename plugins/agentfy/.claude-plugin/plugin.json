@@ -1,6 +1,6 @@
 {
   "name": "agentfy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Get iPhone notifications and Live Activities when your Claude Code agents start, stop, or need you.",
   "homepage": "https://getagentfy.com",
   "author": {
@@ -12,8 +12,8 @@
   "userConfig": {
     "api_token": {
       "type": "string",
-      "title": "Agentfy API token",
-      "description": "Find this in the Agentfy iOS app under Settings → Configure Claude Code.",
+      "title": "Paste your Agentfy API token here",
+      "description": "Copy it from the Agentfy app (Settings → Configure Claude Code → tap the token), then paste it here and press Enter.",
       "sensitive": true,
       "required": true
     },
