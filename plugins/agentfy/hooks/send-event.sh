@@ -26,16 +26,25 @@ PREVIEW="${CLAUDE_PLUGIN_OPTION_PROMPT_PREVIEW:-true}"
 command -v jq   >/dev/null 2>&1 || exit 0
 command -v curl >/dev/null 2>&1 || exit 0
 
+# Data minimization, done locally before anything is sent:
+#  - tag the event name
+#  - from tool_input, keep ONLY the small details the app shows (command,
+#    file_path, pattern, prompt) and DROP everything else — most importantly the
+#    code in an Edit/Write (new_string/old_string/content) never leaves the machine.
+TRIM='. + {hook_event_name: $ev}
+  | (if (.tool_input | type) == "object"
+       then .tool_input |= ({command, file_path, pattern, prompt} | with_entries(select(.value != null)))
+       else . end)'
+
 if [ "$EVENT" = "UserPromptSubmit" ] && [ "$PREVIEW" = "true" ]; then
   # Keep only the first 30 characters of the prompt. Truncated HERE, locally,
   # before the payload ever leaves this machine.
-  FILTER='. + {hook_event_name: $ev} | .prompt = ((.prompt // "") | .[0:30])'
+  FILTER="$TRIM | .prompt = ((.prompt // \"\") | .[0:30])"
 elif [ "$EVENT" = "UserPromptSubmit" ]; then
   # Preview off: never transmit any prompt text.
-  FILTER='. + {hook_event_name: $ev} | del(.prompt)'
+  FILTER="$TRIM | del(.prompt)"
 else
-  # Every other event carries no prompt text; just tag the event name.
-  FILTER='. + {hook_event_name: $ev}'
+  FILTER="$TRIM"
 fi
 
 jq -c --arg ev "$EVENT" "$FILTER" 2>/dev/null \
