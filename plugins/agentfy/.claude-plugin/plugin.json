@@ -1,6 +1,6 @@
 {
   "name": "agentfy",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Get iPhone notifications and Live Activities when your Claude Code agents start, stop, or need you.",
   "homepage": "https://getagentfy.com",
   "author": {

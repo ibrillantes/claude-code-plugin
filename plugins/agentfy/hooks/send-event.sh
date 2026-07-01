@@ -36,7 +36,15 @@ TRIM='. + {hook_event_name: $ev}
        then .tool_input |= ({command, file_path, pattern, prompt} | with_entries(select(.value != null)))
        else . end)'
 
-if [ "$EVENT" = "UserPromptSubmit" ] && [ "$PREVIEW" = "true" ]; then
+# Prompt preview is ON unless EXPLICITLY disabled. Claude Code may inject the
+# boolean default as "1" / "True" rather than the literal string "true", so match
+# loosely instead of requiring an exact "true".
+case "$PREVIEW" in
+  0|false|False|FALSE|no|No|off|Off) PREVIEW_ON=0 ;;
+  *) PREVIEW_ON=1 ;;
+esac
+
+if [ "$EVENT" = "UserPromptSubmit" ] && [ "$PREVIEW_ON" = "1" ]; then
   # Keep only the first 30 characters of the prompt. Truncated HERE, locally,
   # before the payload ever leaves this machine.
   FILTER="$TRIM | .prompt = ((.prompt // \"\") | .[0:30])"
