@@ -7,7 +7,7 @@
 **Monitor your [Claude Code](https://claude.com/claude-code) agents from your phone.**
 Get an iPhone notification or Live Activity the moment an agent starts, stops, or needs you — no terminal babysitting.
 
-[Get the app](https://getagentfy.com) · [What gets sent](#what-gets-sent--and-what-doesnt) · [Issues](https://github.com/ibrillantes/claude-code-plugin/issues)
+[Download on the App Store](https://apps.apple.com/us/app/agentfy-ai-agent-monitor/id6757966311) · [getagentfy.com](https://www.getagentfy.com) · [What gets sent](#what-gets-sent--and-what-doesnt) · [Issues](https://github.com/ibrillantes/claude-code-plugin/issues)
 
 </div>
 
@@ -17,7 +17,7 @@ This repo is both the **plugin marketplace** and the home of the open-source **`
 
 ## Install
 
-You'll need the [Agentfy iOS app](https://getagentfy.com) (for your API token) and Claude Code **v2.1.143+**.
+You'll need the [Agentfy iOS app](https://apps.apple.com/us/app/agentfy-ai-agent-monitor/id6757966311) (for your API token) and Claude Code **v2.1.143+**.
 
 ```bash
 claude plugin marketplace add ibrillantes/claude-code-plugin
