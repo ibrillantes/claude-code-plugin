@@ -47,10 +47,15 @@ else
   FILTER="$TRIM"
 fi
 
-jq -c --arg ev "$EVENT" "$FILTER" 2>/dev/null \
-  | curl -s -m 5 -X POST "$URL" \
-      -H "Authorization: Bearer $TOKEN" \
-      -H 'Content-Type: application/json' \
-      --data-binary @- >/dev/null 2>&1 || true
+# Build the payload, then POST it fire-and-forget so the hook returns instantly and
+# never blocks Claude Code — important on SessionEnd, where a blocking network call
+# gets cancelled as Claude Code shuts down ("Hook cancelled").
+PAYLOAD="$(jq -c --arg ev "$EVENT" "$FILTER" 2>/dev/null)"
+[ -n "$PAYLOAD" ] || exit 0
+
+( printf '%s' "$PAYLOAD" | curl -s -m 5 -X POST "$URL" \
+    -H "Authorization: Bearer $TOKEN" \
+    -H 'Content-Type: application/json' \
+    --data-binary @- >/dev/null 2>&1 & ) >/dev/null 2>&1
 
 exit 0
