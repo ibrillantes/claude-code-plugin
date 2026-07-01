@@ -76,10 +76,18 @@ Collected by Claude Code's plugin dialog when you enable the plugin (or via `--c
 
 ## Rotating your token
 
-If you regenerate your token in the app (Settings → Configure Claude Code → "Regenerate Token"), update the plugin so it stops sending the old one:
+If you regenerate your token in the app (Settings → Configure Claude Code → "Regenerate Token"), update the plugin so it stops sending the old one. Easiest — run the bundled command:
 
-- **Dialog:** `/plugin` → **Installed** → `agentfy` → **Configure** → paste the new token → Save, then `/reload-plugins`, **or**
-- **CLI:** `claude plugin install agentfy@agentfy --config api_token=<NEW_TOKEN>` then `/reload-plugins`
+```
+/agentfy:token <paste-your-new-token>
+```
+
+…then `/reload-plugins`. Equivalent alternatives:
+
+- **Dialog:** `/plugin` → **Installed** → `agentfy` → **Configure** → paste the new token → Save
+- **CLI:** `claude plugin install agentfy@agentfy --config api_token=<NEW_TOKEN>`
+
+(Run `/agentfy:token` with no argument to see these steps inside Claude Code.)
 
 ## Updating the plugin
 
